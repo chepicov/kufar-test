@@ -28,7 +28,6 @@ export default (state = initialState, action) => {
         ...state.ads,
         ...payload,
       ];
-      console.log(ads)
 
       return {
         ...state,

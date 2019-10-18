@@ -1,20 +1,24 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import { routerMiddleware } from 'react-router-redux';
+import createSagaMiddleware from 'redux-saga'
 
+import sagas from './sagas';
 import reducer from './reducer';
 
-const configureStore = (initialState, history) => {
+const configureStore = (initialState) => {
+  const sagaMiddleware = createSagaMiddleware();
+
   const store = createStore(
     reducer,
     initialState,
     compose(
       applyMiddleware(
-        routerMiddleware(history), thunk,
+        sagaMiddleware,
       ),
       window.devToolsExtension ? window.devToolsExtension() : f => f,
     ),
   );
+
+  sagaMiddleware.run(sagas);
 
   if (module.hot) {
     module.hot.accept('./reducer', () => {

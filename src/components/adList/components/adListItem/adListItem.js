@@ -1,5 +1,5 @@
 import React from 'react';
-import { getThumbLink, getLocation, getFormattedTime } from 'helpers/utils';
+import { getThumbLink, getLocation, getFormattedTime, getPrice } from 'helpers/utils';
 
 import photoSvg from 'assets/icons/photo.svg';
 import locationSvg from 'assets/icons/location.svg';
@@ -16,7 +16,7 @@ const AdListItem = (props) => {
   const thumb = getThumbLink(ad.images[0]);
   const time = getFormattedTime(ad.list_time);
   const location = getLocation(ad.params);
-  const price = ad.price_byn ? `${ad.price_byn} р.` : 'Договорная';
+  const price = getPrice(ad.price_byn);
 
   return (
     <li

@@ -3,7 +3,7 @@ import 'moment/locale/ru';
 
 export const getThumbLink = (image) => (
   image ? `https://content.kufar.by/line_thumbs_2x/${image.id.substring(0, 2)}/${image.id}.jpg` : ''
-);
+)
 
 export const getLocation = (params) => {
   const location = [];
@@ -14,9 +14,17 @@ export const getLocation = (params) => {
     location.push(params.area.value);
   }
   return location.slice(0, 2).join(', ');
-};
+}
 
 export const getFormattedTime = (time) => {
   moment.locale('ru');
   return moment(time).fromNow();
+}
+
+export const getPrice = (priceByn) => {
+  const price = Math.round(priceByn / 100);
+  if (!price) {
+    return 'Договорная';
+  }
+  return `${price} р.`;
 }
